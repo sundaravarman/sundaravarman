@@ -22,7 +22,7 @@ Set oFSO = CreateObject("Scripting.FileSystemObject")
 'Check if file already exists
 If filename = "" Then filename = Environ("temp") & JSONfilename
 
-If FileExists(filename) Then
+If FileExists(filename) And (Not FolderExists(filename)) Then
     If Not IsWorkBookOpen(ParseJSONwb) Then
         'Open if the file exists
         If FileExists(ThisWorkbook.path & "\" & ParseJSONwb) Then Workbooks.Open ThisWorkbook.path & "\" & ParseJSONwb
