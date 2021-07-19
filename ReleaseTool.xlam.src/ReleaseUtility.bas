@@ -1,6 +1,7 @@
 Attribute VB_Name = "ReleaseUtility"
 Public wb_name As String
 Public SheetName As String
+Public Const Tools_GUI As String = "Tools_GUI.xlsx"
 Sub ReleaseToFolder(sourcePath As String, destinationPath As String)
     'Release path:"\\qctdfsrt\prj\vlsi\pete\scripts\ptetools\tss_data\TSS_EXCEL\phasing"
     On Error Resume Next
@@ -34,7 +35,7 @@ Sub ReleaseAll()
     'If InStr(Now, "7/6/2021") > 0 Then Exit Sub
     CreateZipFile "C:\Projects\PhasingAutomation\Phasing_tool_Installer", "C:\Projects\PhasingAutomation\Phasing_tool_Installer.zip"
     ReleaseToFolder "C:\Projects\PhasingAutomation\Phasing_tool_Installer.zip", "\\qctdfsrt\prj\vlsi\pete\scripts\ptetools\tss_data\TSS_EXCEL\phasing\Phasing_tool_Installer.zip"
-    ReleaseToFolder ThisWorkbook.path & "\" & ThisWorkbook.Name, "\\qctdfsrt\prj\vlsi\pete\scripts\ptetools\tss_data\TSS_EXCEL\phasing\" & replace(ThisWorkbook.Name, "_dev", "")
+    ReleaseToFolder ThisWorkbook.path & "\" & ThisWorkbook.Name, "\\qctdfsrt\prj\vlsi\pete\scripts\ptetools\tss_data\TSS_EXCEL\phasing\" & Replace(ThisWorkbook.Name, "_dev", "")
 End Sub
 Function CheckNLoadJSON()
 'Check if Sheet Release GUI exist
@@ -43,8 +44,10 @@ Dim path As String
 Dim shp As Shape
 
 path = Environ("temp")
-wb_name = "Tools_GUI.xlsx"
+wb_name = Tools_GUI
 fullname = path & "\" & wb_name
+
+Dim Rng_Selected_Tool As Range
 
 If Not IsWorkBookOpen(wb_name) Then
     If FileExists(fullname) Then
@@ -63,19 +66,37 @@ If Not Evaluate("ISREF('" & SheetName & "'!A1)") Then
      Workbooks(wb_name).ActiveSheet.Name = SheetName
 End If
 With Workbooks(wb_name).ActiveSheet
+    'Bakup the selected tool
+    Selected_Tool = sel_tool
+    
     .Range(.Cells(1, 1), .Cells(.UsedRange.Rows.Count, .UsedRange.Columns.Count)).ClearContents
     'ActiveSheet.Shapes.Range(Array("Rectangle 1")).Select
     For Each shp In ActiveSheet.Shapes
         shp.Delete
     Next shp
+    'Restore the toolname
+
 End With
     With Workbooks(wb_name).Sheets(SheetName)
         .Cells(1, 1) = "FileName"
-        .Cells(1, 2) = "Timestamap"
-        .Cells(1, 3) = "SrcPath"
-        .Cells(1, 4) = "ReleasePath"
+        .Cells(1, 2) = "Timestamp"
+        .Cells(1, 3) = "LastReleasedTagFilew"
+        .Cells(1, 4) = "DevPath"
+        .Cells(1, 5) = "ReleasePath"
     End With
-LoopThroughFiles
+    
+    LoopThroughFiles Environ("temp") & "\" & CStr(Selected_Tool)
+    Set Rng_Selected_Tool = Tool_name
+    Rng_Selected_Tool.Value = Selected_Tool
+    LoadButton
+
+End Function
+Function sel_tool() As String
+        Set Rng_Selected_Tool = Tool_name
+        If Rng_Selected_Tool.Value <> "" Then sel_tool = Rng_Selected_Tool
+End Function
+Function Tool_name() As Range
+    Set Tool_name = Workbooks(Tools_GUI).Sheets(1).Range("H5")
 End Function
 Function IsWorkBookOpen(Name As String) As Boolean
     Dim xWb As Workbook
@@ -83,9 +104,23 @@ Function IsWorkBookOpen(Name As String) As Boolean
     Set xWb = Application.Workbooks.Item(Name)
     IsWorkBookOpen = (Not xWb Is Nothing)
 End Function
-Function CreateVersionFile() As Boolean
-    'Get the OS library and start building
+Sub SaveJsonAndRelease()
+    'save Content as Json
     
+    exceltojson
+    'Create the version file
+    
+    compareAndRelease
+End Sub
+
+Function CreateVersionFile(sel_tool As String, rel_path As String) As Boolean
+    'Get the OS library and start building
+    FileNumber = FreeFile
+    Open sel_tool For Output As #FileNumber
+    Print #FileNumber, Now
+    Print #FileNumber, rel_path
+    Close #FileNumber
+'SaveTextToFile sel_tool, Now & vbLf & rel_path
 End Function
 Function FileExists(wb_name As String) As Boolean
 

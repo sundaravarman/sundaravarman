@@ -10,25 +10,26 @@ LoopThroughFiles
 SaveJSON
 
 End Sub
-Sub LoopThroughFiles()
+Sub LoopThroughFiles(Optional filename As String)
 
 Dim oFSO As Object
 Dim oFolder As Object
 Dim oFile As Object
 Dim i As Integer
-Dim fileName As String
 Set oFSO = CreateObject("Scripting.FileSystemObject")
 'Application.GetOpenFilename("*",,"Please Choose file")
 
 'Check if file already exists
-If FileExists(Environ("temp") & JSONfilename) Then
+If filename = "" Then filename = Environ("temp") & JSONfilename
+
+If FileExists(filename) Then
     If Not IsWorkBookOpen(ParseJSONwb) Then
         'Open if the file exists
         If FileExists(ThisWorkbook.path & "\" & ParseJSONwb) Then Workbooks.Open ThisWorkbook.path & "\" & ParseJSONwb
     End If
     Dim test As String
-    test = Application.Run(ParseJSONwb & "!readjsontxt", Environ("temp") & JSONfilename)
-
+    test = Application.Run(ParseJSONwb & "!readjsontxt", filename)
+    ConvertDataToTable ActiveSheet
 Else
 
     Dim sFolder As String
@@ -42,7 +43,6 @@ Else
     End With
     FileNames = GetFiles(sFolder, TimeStamps)
 End If
-    LoadButton
 'Set oFolder = oFSO.GetFolder("E:\json")
 
 End Sub
@@ -64,7 +64,9 @@ Public Function GetFiles(sPath$, Optional TimeStamps, Optional sFilter$ = "*.*")
     Dim tStamp As String
     Dim i As Integer
     i = 1
-    With Workbooks(wb_name).Sheets(SheetName)
+    Dim rng As Worksheet
+    Set rng = Workbooks(wb_name).Sheets(SheetName)
+    With rng
         f = Dir(sPath & _
             String(Abs(Right(sPath, 1) <> "\"), "\") & sFilter)
             
@@ -72,38 +74,50 @@ Public Function GetFiles(sPath$, Optional TimeStamps, Optional sFilter$ = "*.*")
             'Mid(s, p + 1, Len(f) + 1) = f & vbLf
             'tStamp = tStamp & oFS.GetFile(sPath$ & "\" & f).DateLastModified & vbLf
             p = p + Len(f) + 1
-            f = Dir
             t = sPath$ & "\" & f
             If f <> "" Then
                 i = i + 1
                 .Cells(i, 1) = f
                 .Cells(i, 2) = oFS.GetFile(sPath$ & "\" & f).DateLastModified
                 .Cells(i, 3) = t
-                .Cells(i, 4) = "null"
+                .Cells(i, 5) = "\\qctdfsrt\prj\vlsi\pete\scripts\ptetools\tss_data\TSS_EXCEL\phasing"
             End If
+            f = Dir
         Loop
-        'GetFiles = Split(Left(s, p - 1), vbLf)
-        'TimeStamps = Split(tStamp, vbLf)
-        Dim objTable As ListObject
-        Dim LastRow, LastCol As Integer
-        LastCol = .Cells(1, .Columns.Count).End(xlToLeft).Column
-        LastRow = .Cells(.Rows.Count, "A").End(xlUp).row
-
-        .Range(.Cells(1, 1), .Cells(LastRow, LastCol)).Select
-        '.Range(.Cells(1, 1), .Cells(1, .UsedRange.Columns.Count)).Select
-        'Selection.End(xlDown).Select
-        '.Range(.Cells(1, 1), .Cells(1, .UsedRange.Columns.Count)).End(xlDown).Select
-        Set objTable = ActiveSheet.ListObjects.Add(xlSrcRange, Selection, , xlYes)
+        ConvertDataToTable rng
     End With
 End Function
-Sub SaveJsonAndRelease()
-'save Content as Json
- exceltojson
-End Sub
-Function LoadButton()
-ActiveSheet.Shapes.AddShape(msoShapeRectangle, 645.5, 1.5, 63, 22.5).Select
-Selection.OnAction = "SaveJsonAndRelease"
-Selection.ShapeRange(1).TextFrame2.TextRange.Characters.Text = "  Release"
+Function ConvertDataToTable(SelSheet As Worksheet)
+        Dim objTable As ListObject
+        Dim LastRow, LastCol As Integer
+        With SelSheet
+            LastCol = .Cells(1, .Columns.Count).End(xlToLeft).Column
+            LastRow = .Cells(.Rows.Count, "A").End(xlUp).row
+    
+            .Range(.Cells(1, 1), .Cells(LastRow, LastCol)).Select
+            '.Range(.Cells(1, 1), .Cells(1, .UsedRange.Columns.Count)).Select
+            'Selection.End(xlDown).Select
+            '.Range(.Cells(1, 1), .Cells(1, .UsedRange.Columns.Count)).End(xlDown).Select
+            On Error Resume Next
+            Set objTable = ActiveSheet.ListObjects.Add(xlSrcRange, Selection, , xlYes)
+            On Error GoTo 0
+        End With
 End Function
 
+Function LoadButton()
 
+'clear the existing buttons if any
+On Error Resume Next
+ActiveSheet.Shapes(2).Delete
+ActiveSheet.Shapes(1).Delete
+On Error GoTo 0
+
+ActiveSheet.Shapes.AddShape(msoShapeRectangle, 645.5, 1.5, 70, 22.5).Select
+Selection.OnAction = "SaveJsonAndRelease"
+Selection.ShapeRange(1).TextFrame2.TextRange.Characters.Text = "    Release"
+
+ActiveSheet.Shapes.AddShape(msoShapeRectangle, 645.5, 55.5, 70, 22.5).Select
+Selection.OnAction = "CheckNLoadJSON"
+'Selection.ShapeRange(2).TextFrame2.TextRange.Characters.Text = "Load"
+ActiveSheet.Shapes(2).TextFrame2.TextRange.Characters.Text = "  Select Tool"
+End Function

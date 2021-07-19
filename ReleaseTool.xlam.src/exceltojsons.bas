@@ -36,7 +36,10 @@ Public Sub exceltojson()
             'jstring = ConvertToJson(items, Whitespace:=2)
         Next
         jstring = Application.Run(ParseJSONwb & "!ConvertToJson", items, 2)
-        SaveTextToFile jstring
+        'Bakup the selected tool
+        Dim Selected_Tool  As String
+        Selected_Tool = sel_tool
+        SaveTextToFile jstring, Environ("temp") & "\" & Selected_Tool
     End With
     'Sheets(1).Range("A4").Value = ConvertToJson(items, Whitespace:=2)
 End Sub

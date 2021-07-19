@@ -50,8 +50,8 @@ Function Release()
     'Release path:"\\qctdfsrt\prj\vlsi\pete\scripts\ptetools\tss_data\TSS_EXCEL\phasing"
     Dim sourcePath As String
     Dim destinationPath As String
-    destinationPath = "\\qctdfsrt\prj\vlsi\pete\scripts\ptetools\tss_data\TSS_EXCEL\phasing\" & replace(ThisWorkbook.Name, "_dev", "")
-    sourcePath = ThisWorkbook.path & "\" & replace(ThisWorkbook.Name, "_dev", "")
+    destinationPath = "\\qctdfsrt\prj\vlsi\pete\scripts\ptetools\tss_data\TSS_EXCEL\phasing\" & Replace(ThisWorkbook.Name, "_dev", "")
+    sourcePath = ThisWorkbook.path & "\" & Replace(ThisWorkbook.Name, "_dev", "")
     On Error Resume Next
     Kill sourcePath
     If FileExists(sourcePath) Then
@@ -176,18 +176,18 @@ Function CheckForUpdates(LauncherUpdate As Boolean, ComponentsUpdate As Boolean)
             If MsgBox("An update Is available. Click        'OK' to overwrite" & _
                " the current local version With the newest version.", vbOKCancel) = vbOK Then
             
-                LocalXlsFileFullName = replace(ThisWorkbook.fullname, ".xl", "_temp.xl")
+                LocalXlsFileFullName = Replace(ThisWorkbook.fullname, ".xl", "_temp.xl")
                 'download updated file
                 If URLDownloadToFile(0&, RemoteXlsFileFullName, _
                 LocalXlsFileFullName, 0&, 0&) = 0 Then
                 
                     On Error Resume Next
-                    Kill replace(LocalXlsFileFullName, "_temp.xl", "_temp_2.xl")
+                    Kill Replace(LocalXlsFileFullName, "_temp.xl", "_temp_2.xl")
                     On Error GoTo 0
                     
                     'must temporarily change the name of the activeworkbook and
                     'change the file access to readonly
-                    ThisWorkbook.SaveAs replace(LocalXlsFileFullName, "_temp.xl", "_temp_2.xl")
+                    ThisWorkbook.SaveAs Replace(LocalXlsFileFullName, "_temp.xl", "_temp_2.xl")
                     If ThisWorkbook.ReadOnly = False Then
                         ThisWorkbook.ChangeFileAccess xlReadOnly
                     End If
@@ -195,11 +195,11 @@ Function CheckForUpdates(LauncherUpdate As Boolean, ComponentsUpdate As Boolean)
                     'create a name at the application level so that Open code is not run
                     'flag here. checked in workbook open
                     Application.ExecuteExcel4Macro "SET.NAME(""RunCode"",""NO"")"
-                    Kill replace(LocalXlsFileFullName, "_temp.xl", ".xl")
+                    Kill Replace(LocalXlsFileFullName, "_temp.xl", ".xl")
                     
                     'you need to account for a file access error here
-                    Name LocalXlsFileFullName As replace(LocalXlsFileFullName, "_temp.xl", ".xl")
-                    Workbooks.Open replace(LocalXlsFileFullName, "_temp.xl", ".xl")
+                    Name LocalXlsFileFullName As Replace(LocalXlsFileFullName, "_temp.xl", ".xl")
+                    Workbooks.Open Replace(LocalXlsFileFullName, "_temp.xl", ".xl")
                     Application.ExecuteExcel4Macro "SET.NAME(""RunCode"")"
                     Kill ThisWorkbook.fullname
                     
@@ -225,9 +225,9 @@ Function CheckForUpdates(LauncherUpdate As Boolean, ComponentsUpdate As Boolean)
         If ComponentsUpdate Or LauncherUpdate Then
             'Move the revision file to downloaded.txt file
             Dim fso As New FileSystemObject
-            Dim fileName As String
-            fileName = fso.GetFileName(UpdateNotificationRemoteFileFullName)
-            Name Environ("temp") & "\" & fileName As path & replace(fileName, ".txt", "") & "_downloaded.txt"
+            Dim filename As String
+            filename = fso.GetFileName(UpdateNotificationRemoteFileFullName)
+            Name Environ("temp") & "\" & filename As path & Replace(filename, ".txt", "") & "_downloaded.txt"
         End If
     Else
         Application.StatusBar = "Failed To download update notification file..."

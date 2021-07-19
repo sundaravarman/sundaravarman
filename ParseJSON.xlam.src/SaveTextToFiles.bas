@@ -1,13 +1,15 @@
 Attribute VB_Name = "SaveTextToFiles"
 Option Explicit
-Public Const JSONfilename As String = "\json.txt"
 
 ' Go to Tools -> References... and check "Microsoft Scripting Runtime" to be able to use
 ' the FileSystemObject which has many useful features for handling files and folders
-Public Sub SaveTextToFile(jstring As String, Optional filePath As String)
+Public Sub SaveTextToFile(jstring As String)
 
+    Dim FilePath As String
+    Dim fileName As String
     Dim jsonfile As String
-    If filePath = "" Then filePath = Environ("temp") & JSONfilename
+    fileName = "\json.txt"
+    FilePath = Environ("Temp") + fileName
     
     ' The advantage of correctly typing fso as FileSystemObject is to make autocompletion
     ' (Intellisense) work, which helps you avoid typos and lets you discover other useful
@@ -17,7 +19,7 @@ Public Sub SaveTextToFile(jstring As String, Optional filePath As String)
     Dim fileStream As TextStream
 
     ' Here the actual file is created and opened for write access
-    Set fileStream = fso.CreateTextFile(filePath)
+    Set fileStream = fso.CreateTextFile(FilePath)
 
     ' Write something to the file
     fileStream.WriteLine (jstring)
@@ -25,7 +27,7 @@ Public Sub SaveTextToFile(jstring As String, Optional filePath As String)
     fileStream.Close
 
     ' Here is another great method of the FileSystemObject that checks if a file exists
-    If fso.FileExists(filePath) Then
+    If fso.FileExists(FilePath) Then
         'MsgBox "Yay! The file was created! :D"
     End If
 
@@ -34,5 +36,5 @@ Public Sub SaveTextToFile(jstring As String, Optional filePath As String)
     ' two lines (see https://stackoverflow.com/a/517202/2822719 for details):
     'Set fileStream = Nothing
     'Set fso = Nothing
-'readjsontxt filePath
+readjsontxt FilePath
 End Sub
