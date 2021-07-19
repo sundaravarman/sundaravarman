@@ -78,7 +78,7 @@ Public Function GetFiles(sPath$, Optional TimeStamps, Optional sFilter$ = "*.*")
             If f <> "" Then
                 i = i + 1
                 .Cells(i, 1) = f
-                .Cells(i, 2) = oFS.GetFile(sPath$ & "\" & f).DateLastModified
+                .Cells(i, 2) = Format(oFS.GetFile(sPath$ & "\" & f).DateLastModified, "mm/dd/yyyy HH:mm:ss")
                 .Cells(i, 3) = t
                 .Cells(i, 5) = "\\qctdfsrt\prj\vlsi\pete\scripts\ptetools\tss_data\TSS_EXCEL\phasing"
             End If

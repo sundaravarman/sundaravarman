@@ -61,22 +61,21 @@ Public Function Checktimestampdiff(sPath$, Optional TimeStamps, Optional post As
         i = 2
         Do While (.Cells(i, Filecol) <> "")
             'Get the timestamp of Dev path\FileName
-            Debug.Print (.Cells(i, DevCol) & .Cells(i, Filecol))
+            'Debug.Print (.Cells(i, DevCol) & .Cells(i, Filecol))
             If Not FileExists((.Cells(i, DevCol) & .Cells(i, Filecol))) Then
                 MsgBox ("Filename " & ((.Cells(i, DevCol) & .Cells(i, Filecol))) & " does not exist.Please check and Add in Dev Path")
                 End
             End If
-            tStamp = oFS.GetFile(.Cells(i, DevCol) & .Cells(i, Filecol)).DateLastModified
+            tStamp = Format((oFS.GetFile(.Cells(i, DevCol) & .Cells(i, Filecol)).DateLastModified), "mm/dd/yyyy HH:mm:ss")
             reltStamp = .Cells(i, Timestampcol)
             'Compare timestamp read vs Dev timestamp if no difference then compare file = False Else True
             If reltStamp <> tStamp Then
                 Checktimestampdiff = True
                 'Copy the files different from dev to tag path to prepare for release
                 If post = False Then Call fso.CopyFile(.Cells(i, DevCol) & .Cells(i, Filecol), .Cells(i, releasedTagCol), True)
-                
-                'Update the timestamp
-                If post = True Then .Cells(i, Timestampcol) = tStamp
             End If
+            'Update the timestamp
+            If post = True Then .Cells(i, Timestampcol) = tStamp
             i = i + 1
         Loop
         'Create the zip file
@@ -84,9 +83,16 @@ Public Function Checktimestampdiff(sPath$, Optional TimeStamps, Optional post As
         Dim fdir As String
         Dim fso2 As New FileSystemObject
         fdir = fso2.GetFolder(.Cells(2, releasedTagCol) & "\..")
-        CreateZipFile fdir, fdir & ".zip"
+        If post = False And Checktimestampdiff = True Then
+            CreateZipFile fdir, fdir & ".zip"
+            ReleaseToFolder fdir & ".zip", .Cells(2, releasedCol) & "\" 'Full zip file
+            'Launcher file
+            ReleaseToFolder .Cells(2, DevCol) & .Cells(2, Filecol), .Cells(2, releasedCol) & "\" & .Cells(2, Filecol)
+            'ReleaseToFolder ThisWorkbook.path & "\" & ThisWorkbook.Name, "\\qctdfsrt\prj\vlsi\pete\scripts\ptetools\tss_data\TSS_EXCEL\phasing\" & Replace(ThisWorkbook.Name, "_dev", "")
+            If Checktimestampdiff = True Then CreateVersionFile .Cells(2, DevCol) & sel_tool & "_revision", .Cells(2, releasedCol)
+            'Rev file
+            ReleaseToFolder .Cells(3, DevCol) & .Cells(3, Filecol), .Cells(3, releasedCol) & "\" & .Cells(3, Filecol)
+        End If
 '   CreateZipFile "C:\Projects\PhasingAutomation\Phasing_tool_Installer", "C:\Projects\PhasingAutomation\Phasing_tool_Installer.zip"
-
-        If post = False Then If Checktimestampdiff = True Then CreateVersionFile .Cells(2, DevCol) & sel_tool & "_revision", .Cells(2, releasedCol)
     End With
 End Function

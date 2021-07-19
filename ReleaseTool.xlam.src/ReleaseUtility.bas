@@ -17,7 +17,7 @@ Sub ReleaseToFolder(sourcePath As String, destinationPath As String)
             End
         End If
     Else
-        If Not FolderExists(destinationPath) Then
+        If Not FolderExists(destinationPath & "\..") Then
             Application.StatusBar = "Destination folder does not exist:" & destinationPath
             End
         End If
@@ -33,9 +33,9 @@ Sub ReleaseAll()
     'Check if JSON loaded in Release sheet Else call Main in ParseJSON
     'CheckNLoadJSON
     'If InStr(Now, "7/6/2021") > 0 Then Exit Sub
-    CreateZipFile "C:\Projects\PhasingAutomation\Phasing_tool_Installer", "C:\Projects\PhasingAutomation\Phasing_tool_Installer.zip"
-    ReleaseToFolder "C:\Projects\PhasingAutomation\Phasing_tool_Installer.zip", "\\qctdfsrt\prj\vlsi\pete\scripts\ptetools\tss_data\TSS_EXCEL\phasing\Phasing_tool_Installer.zip"
-    ReleaseToFolder ThisWorkbook.path & "\" & ThisWorkbook.Name, "\\qctdfsrt\prj\vlsi\pete\scripts\ptetools\tss_data\TSS_EXCEL\phasing\" & Replace(ThisWorkbook.Name, "_dev", "")
+    'CreateZipFile "C:\Projects\PhasingAutomation\Phasing_tool_Installer", "C:\Projects\PhasingAutomation\Phasing_tool_Installer.zip"
+    'ReleaseToFolder "C:\Projects\PhasingAutomation\Phasing_tool_Installer.zip", "\\qctdfsrt\prj\vlsi\pete\scripts\ptetools\tss_data\TSS_EXCEL\phasing\Phasing_tool_Installer.zip"
+    'ReleaseToFolder ThisWorkbook.path & "\" & ThisWorkbook.Name, "\\qctdfsrt\prj\vlsi\pete\scripts\ptetools\tss_data\TSS_EXCEL\phasing\" & Replace(ThisWorkbook.Name, "_dev", "")
 End Sub
 Function CheckNLoadJSON()
 'Check if Sheet Release GUI exist
@@ -111,6 +111,9 @@ Sub SaveJsonAndRelease()
     'Create the version file
     
     compareAndRelease
+    
+    'Save after release to capture the timestamp if success
+    exceltojson
 End Sub
 
 Function CreateVersionFile(sel_tool As String, rel_path As String) As Boolean
@@ -147,11 +150,11 @@ Sub CreateZipFile(folderToZipPath As Variant, zippedFileFullName As Variant)
     
     'Copy the files & folders into the zip file
     Set ShellApp = CreateObject("Shell.Application")
-    ShellApp.Namespace(zippedFileFullName).CopyHere ShellApp.Namespace(folderToZipPath).items
+    ShellApp.Namespace(CStr(zippedFileFullName)).CopyHere ShellApp.Namespace(CStr(folderToZipPath)).items
     
     'Zipping the files may take a while, create loop to pause the macro until zipping has finished.
     On Error Resume Next
-    Do Until ShellApp.Namespace(zippedFileFullName).items.Count = ShellApp.Namespace(folderToZipPath).items.Count
+    Do Until ShellApp.Namespace(CStr(zippedFileFullName)).items.Count = ShellApp.Namespace(CStr(folderToZipPath)).items.Count
         Application.Wait (Now + TimeValue("0:00:01"))
     Loop
     On Error GoTo 0
