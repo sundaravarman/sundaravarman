@@ -1,0 +1,2 @@
+python "C:\Users\sundara\OneDrive - Qualcomm\Documents\projects\testcase\arg_substitute\arg_substitute.py" -t "C:\Users\sundara\OneDrive - Qualcomm\Documents\projects\testcase\arg_substitute\template_file" -v "C:\Users\sundara\OneDrive - Qualcomm\Documents\projects\testcase\arg_substitute\block_list" -o "C:\Users\sundara\OneDrive - Qualcomm\Documents\projects\testcase\arg_substitute\output_file_to_run"
+cmd
