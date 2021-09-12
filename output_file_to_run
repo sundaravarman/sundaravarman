@@ -1,89 +1,9 @@
-vprod bitra r1_sec8lpu
-vblk TDF_ATPG_MMA
-cmd
-/prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/ATPG/SRC/ATPG_patex.run /prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/TDF_ATPG_MMA/SRC/l1
-/prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/ATPG/SRC/ATPG_patex.run /prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/TDF_ATPG_MMA/SRC/l1_slc_list
-
-ls -d /prj/qct/chips/lahaina/sandiego/test/vec/r1_sec5lpe/work_ggc/TDF_ATPG_MMA/*MHz*ggt| wc -l
-
-which <tools>vprod bitra r1_sec8lpu
-vblk TDF_ATPG_MMB
-cmd
-/prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/ATPG/SRC/ATPG_patex.run /prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/TDF_ATPG_MMB/SRC/l1
-/prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/ATPG/SRC/ATPG_patex.run /prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/TDF_ATPG_MMB/SRC/l1_slc_list
-
-ls -d /prj/qct/chips/lahaina/sandiego/test/vec/r1_sec5lpe/work_ggc/TDF_ATPG_MMB/*MHz*ggt| wc -l
-
-which <tools>vprod bitra r1_sec8lpu
-vblk TDF_ATPG_MMC
-cmd
-/prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/ATPG/SRC/ATPG_patex.run /prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/TDF_ATPG_MMC/SRC/l1
-/prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/ATPG/SRC/ATPG_patex.run /prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/TDF_ATPG_MMC/SRC/l1_slc_list
-
-ls -d /prj/qct/chips/lahaina/sandiego/test/vec/r1_sec5lpe/work_ggc/TDF_ATPG_MMC/*MHz*ggt| wc -l
-
-which <tools>vprod bitra r1_sec8lpu
-vblk TDF_ATPG_MMD
-cmd
-/prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/ATPG/SRC/ATPG_patex.run /prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/TDF_ATPG_MMD/SRC/l1
-/prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/ATPG/SRC/ATPG_patex.run /prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/TDF_ATPG_MMD/SRC/l1_slc_list
-
-ls -d /prj/qct/chips/lahaina/sandiego/test/vec/r1_sec5lpe/work_ggc/TDF_ATPG_MMD/*MHz*ggt| wc -l
-
-which <tools>vprod bitra r1_sec8lpu
-vblk TDF_ATPG_CPU
-cmd
-/prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/ATPG/SRC/ATPG_patex.run /prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/TDF_ATPG_CPU/SRC/l1
-/prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/ATPG/SRC/ATPG_patex.run /prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/TDF_ATPG_CPU/SRC/l1_slc_list
-
-ls -d /prj/qct/chips/lahaina/sandiego/test/vec/r1_sec5lpe/work_ggc/TDF_ATPG_CPU/*MHz*ggt| wc -l
-
-which <tools>vprod bitra r1_sec8lpu
-vblk TDF_ATPG_GPU
-cmd
-/prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/ATPG/SRC/ATPG_patex.run /prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/TDF_ATPG_GPU/SRC/l1
-/prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/ATPG/SRC/ATPG_patex.run /prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/TDF_ATPG_GPU/SRC/l1_slc_list
-
-ls -d /prj/qct/chips/lahaina/sandiego/test/vec/r1_sec5lpe/work_ggc/TDF_ATPG_GPU/*MHz*ggt| wc -l
-
-which <tools>vprod bitra r1_sec8lpu
-vblk TDF_ATPG_CTR
-cmd
-/prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/ATPG/SRC/ATPG_patex.run /prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/TDF_ATPG_CTR/SRC/l1
-/prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/ATPG/SRC/ATPG_patex.run /prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/TDF_ATPG_CTR/SRC/l1_slc_list
-
-ls -d /prj/qct/chips/lahaina/sandiego/test/vec/r1_sec5lpe/work_ggc/TDF_ATPG_CTR/*MHz*ggt| wc -l
-
-which <tools>vprod bitra r1_sec8lpu
-vblk TDF_ATPG_CTL
-cmd
-/prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/ATPG/SRC/ATPG_patex.run /prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/TDF_ATPG_CTL/SRC/l1
-/prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/ATPG/SRC/ATPG_patex.run /prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/TDF_ATPG_CTL/SRC/l1_slc_list
-
-ls -d /prj/qct/chips/lahaina/sandiego/test/vec/r1_sec5lpe/work_ggc/TDF_ATPG_CTL/*MHz*ggt| wc -l
-
-which <tools>vprod bitra r1_sec8lpu
-vblk TDF_ATPG_DDR
-cmd
-/prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/ATPG/SRC/ATPG_patex.run /prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/TDF_ATPG_DDR/SRC/l1
-/prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/ATPG/SRC/ATPG_patex.run /prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/TDF_ATPG_DDR/SRC/l1_slc_list
-
-ls -d /prj/qct/chips/lahaina/sandiego/test/vec/r1_sec5lpe/work_ggc/TDF_ATPG_DDR/*MHz*ggt| wc -l
-
-which <tools>vprod bitra r1_sec8lpu
-vblk TDF_ATPG_LPA
-cmd
-/prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/ATPG/SRC/ATPG_patex.run /prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/TDF_ATPG_LPA/SRC/l1
-/prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/ATPG/SRC/ATPG_patex.run /prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/TDF_ATPG_LPA/SRC/l1_slc_list
-
-ls -d /prj/qct/chips/lahaina/sandiego/test/vec/r1_sec5lpe/work_ggc/TDF_ATPG_LPA/*MHz*ggt| wc -l
-
-which <tools>vprod bitra r1_sec8lpu
-vblk TDF_ATPG_TOP
-cmd
-/prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/ATPG/SRC/ATPG_patex.run /prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/TDF_ATPG_TOP/SRC/l1
-/prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/ATPG/SRC/ATPG_patex.run /prj/qct/chips/bitra/sandiego/test/vcd/r1_sec8lpu/tester_vcd/TDF_ATPG_TOP/SRC/l1_slc_list
-
-ls -d /prj/qct/chips/lahaina/sandiego/test/vec/r1_sec5lpe/work_ggc/TDF_ATPG_TOP/*MHz*ggt| wc -l
-
-which <tools>
+which gen_burst_with_microcode
+which tss_mbist_util
+which tsscheck
+which patternTypeCharSync
+which tssupdate3
+which add_microcode
+which tss_pattern_util
+which tssread3
+which regen_count

@@ -1,9 +1,1 @@
-vprod <project> <si_revision>
-vblk <block_name>
-cmd
-/prj/qct/chips/<project>/sandiego/test/vcd/<si_revision>/tester_vcd/ATPG/SRC/ATPG_patex.run /prj/qct/chips/<project>/sandiego/test/vcd/<si_revision>/tester_vcd/<block_name>/SRC/l1
-/prj/qct/chips/<project>/sandiego/test/vcd/<si_revision>/tester_vcd/ATPG/SRC/ATPG_patex.run /prj/qct/chips/<project>/sandiego/test/vcd/<si_revision>/tester_vcd/<block_name>/SRC/l1_slc_list
-
-ls -d /prj/qct/chips/lahaina/sandiego/test/vec/r1_sec5lpe/work_ggc/<block_name>/*MHz*ggt| wc -l
-
 which <tools>
