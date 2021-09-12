@@ -1,0 +1,12 @@
+<project>,<si_revision>,<block_name>
+bitra,r1_sec8lpu,TDF_ATPG_MMA
+bitra,r1_sec8lpu,TDF_ATPG_MMB
+bitra,r1_sec8lpu,TDF_ATPG_MMC
+bitra,r1_sec8lpu,TDF_ATPG_MMD
+bitra,r1_sec8lpu,TDF_ATPG_CPU
+bitra,r1_sec8lpu,TDF_ATPG_GPU
+bitra,r1_sec8lpu,TDF_ATPG_CTR
+bitra,r1_sec8lpu,TDF_ATPG_CTL
+bitra,r1_sec8lpu,TDF_ATPG_DDR
+bitra,r1_sec8lpu,TDF_ATPG_LPA
+bitra,r1_sec8lpu,TDF_ATPG_TOP
