@@ -125,7 +125,7 @@ if __name__ == "__main__":
                 ttt = template
                 for string_replace in arg_header.strip('\n').split(","):
                     new_string = arg_name.strip('\n').split(",")[i]
-                    ttt = ttt.replace(string_replace, new_string)
+                    ttt = ttt.replace('<' + string_replace + '>', new_string)
                     i = i+1
                 out_file = open (output_file,'a')
                 out_file.write(ttt)
