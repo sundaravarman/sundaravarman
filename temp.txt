@@ -1,0 +1,16 @@
+1	Start	2		start		Green
+2	Check & set prod/Dev path	3		process		Blue
+3	For handshake path clear old end request	4		process		Blue
+4	If PID exist	5,10	yes,No	decision		Blue
+5	Crete Terminal request	6		process		Blue
+6	wait till Timeout for clearing Terminal	7		process		Blue
+7	If timeout is True	8,9	yes,No	decision		Blue
+8	Kill PID process	9		process		Blue
+9	Delete PID file			process		Blue
+10	Start RFL	11		process	Right	Blue
+11	Get RFL PID	12		process	Right	Blue
+12	wait till Timeout for RFL PID to progress	13		process		Blue
+13	If timeout is True	14,15	yes,No	decision		Blue
+14	Email process not started	16		process		Blue
+15	create PID_start file	16				Blue
+16	End					Blue
