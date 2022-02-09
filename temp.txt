@@ -13,4 +13,4 @@
 13	If timeout is True	14,15	yes,No	decision		Blue
 14	Email process not started	16		process		Blue
 15	create PID_start file	16				Blue
-16	End					Blue
+16	End
