@@ -1,0 +1,311 @@
+{
+  "tssupdate3": {
+    "add_milestone": {
+      "mandatory": {
+        "Chip": {
+               "type":"string",
+               "description":"Project name",
+               "Function": "get_project_name()"
+               },
+
+        "rev": {
+               "type":"string",
+               "description":"Revision name",
+               "Function": "get_revision_name(chip)"
+               },
+        "foundry":  {
+               "type":"string",
+               "description":"foundry name",
+               "Function": "get_foundry_name(chip,rev)"
+               },
+        "add_milestone": {
+               "type":"string",
+          "description":"milestone name and date in the format , milestone_name=<MM/DD/YYY>, eg: SC=04/30/2018,SOD=08/24/2018,CS=05/14/2020.\n available choice are : 'BTO','TO','SC','BO','SOD','CSRR','P0','P1','P2','P3','P4A','P4B','SPLITS','CS'"
+        }
+      },
+      "optional": {
+      },
+      "example": "tssupdate3 add_milestone SC=04/30/2018,SOD=08/24/2018 chip testing_demo rev r1_secn14lpp foundry sec"
+    },
+    "update_vector": {
+      "mandatory": {
+        "update_vector": {
+               "type":"string",
+               "description":"vector name/ comma separated vector names/ list file csv"
+               },
+        "sundar":{
+               "type":"string",
+               "description":"Project name",
+               "Function": "get_project_name()"
+               },
+        "varman": {
+               "type":"string",
+               "description":"revision name",
+               "Function": "get_revision_name(chip)"
+               },
+        "madurai": {
+               "type":"string",
+               "description":"block name",
+               "Function": "get_block_name(chip,rev)"
+               }
+      },
+      "optional": {
+        "vector_type":  {
+               "type":"enum",
+               "description":"vector name",
+               "choice": "'PROD','EVAL','RMA','QMFAT','BURN_IN','DEBUG','UNKNOWN','REPAIR','VALIDATION'"
+               },
+        "microcode": {
+               "type":"string",
+               "description":"microcode"
+               },
+        "interface":  {
+               "type":"string",
+               "description":"interface name"
+               },
+        "interface_frequency":  {
+               "type":"varchar",
+               "description":"interface frequency in MHz"
+               },
+        "design_engineer": {
+               "type":"string",
+               "description":"design engineer's name"
+               },
+        "base_vector":  {
+               "type":"string",
+               "description":"base vector name for debug vectors,from available non debug vector for that block"
+               },
+        "slice_count":  {
+               "type":"integer",
+               "description":"slice count number,1 to available slice number for that vector"
+               },
+        "platform": {
+               "type":"enum",
+               "description":"platform name",
+               "choice": "ATE,ATE_GGC,SLT_GGC,ATE:ATE_GGC:SLT_GGC,ATE:ATE_GGC,ATE:SLT_GGC,ATE_GGC:SLT_GGC,UFLEX,ATE:UFLEX,ATE:SLT_GGC:ATE_GGC:UFLEX,UFLEX:ATE_GGC,UFLEX:SLT_GGC"
+               },
+        "80p":{
+               "type":"integer",
+               "description":"80p count number"
+               },
+        "80p_enable": {
+               "type":"enum",
+               "description":"80p enable status",
+               "choice": "Y,N"
+               },
+        "scan_tml": {
+               "type":"string",
+               "description":"scan tml value"
+               },
+        "partial_good": {
+               "type":"enum",
+               "description":"partial good status",
+               "choice": "Y,N"
+               },
+        "priority": {
+               "type":"integer",
+               "description":"priority"
+               },
+        "core":  {
+               "type":"string",
+               "description":"core"
+               },
+        "marker":  {
+               "type":"string",
+               "description":"marker value",
+               "choice": "'c','d','p','q','i','n'"
+               },
+        "char":  {
+               "type":"string",
+               "description":"char"
+               },
+        "smoke_suite":  {
+               "type":"enum",
+               "description":"smoke suite",
+                "choice": "Y,N"
+               },
+        "available": {
+          "type": "enum",
+          "description": "available status",
+          "choice": "Y,N"
+        },
+        "tags":  {
+               "type":"string",
+               "description":"tag value"
+               },
+        "comment":  {
+               "type":"string",
+               "description":"comments"
+               }
+      },
+      "example": ["tssupdate3 update_vector vector1,vector2 block acc chip torino rev r1_tsmcn20soc", "tssupdate3 remove_vector vector_list block acc chip torino rev r1_tsmcn20soc"]
+    },
+    "add_vector": {
+      "mandatory": {
+        "add_vector": {
+               "type":"string",
+               "description":"vector name",
+               "choice": "vector name/ comma separated vector names/ list file csv"
+               },
+         "chip":{
+               "type":"string",
+               "description":"Project name",
+               "Function": "get_project_name()"
+               },
+        "rev": {
+               "type":"string",
+               "description":"revision name",
+               "Function": "get_revision_name(chip)"
+               },
+        "block": {
+               "type":"string",
+               "description":"block name",
+               "Function": "get_block_name(chip,rev)"
+               },
+       "vector_type":  {
+               "type":"enum",
+               "description":"vector name",
+               "choice": "'PROD','EVAL','RMA','QMFAT','BURN_IN','DEBUG','UNKNOWN','REPAIR','VALIDATION'"
+               },
+        "interface":  {
+               "type":"string",
+               "description":"interface name"
+               },
+        "interface_frequency":  {
+               "type":"varchar",
+               "description":"interface frequency in MHz"
+               },
+        "design_engineer": {
+               "type":"string",
+               "description":"design engineer's name"
+               }
+      },
+      "optional": {
+         "microcode": {
+               "type":"string",
+               "description":"microcode"
+               },
+        "base_vector":  {
+               "type":"string",
+               "description":"base vector name for debug vectors,from available non debug vector for that block"
+               },
+        "slice_count":  {
+               "type":"integer",
+               "description":"slice count number,1 to available slice number for that vector"
+               },
+        "platform": {
+               "type":"enum",
+               "description":"platform name",
+               "choice": "ATE,ATE_GGC,SLT_GGC,ATE:ATE_GGC:SLT_GGC,ATE:ATE_GGC,ATE:SLT_GGC,ATE_GGC:SLT_GGC,UFLEX,ATE:UFLEX,ATE:SLT_GGC:ATE_GGC:UFLEX,UFLEX:ATE_GGC,UFLEX:SLT_GGC"
+               },
+        "80p":{
+               "type":"integer",
+               "description":"80p count number"
+               },
+        "80p_enable": {
+               "type":"enum",
+               "description":"80p enable status",
+               "choice": "Y,N"
+               },
+        "scan_tml": {
+               "type":"string",
+               "description":"scan tml value"
+               },
+        "partial_good": {
+               "type":"enum",
+               "description":"partial good status",
+               "choice": "Y,N"
+               },
+        "priority": {
+               "type":"integer",
+               "description":"priority"
+               },
+        "core":  {
+               "type":"string",
+               "description":"core"
+               },
+        "marker":  {
+               "type":"string",
+               "description":"marker value",
+               "choice": "'c','d','p','q','i','n'"
+               },
+        "char":  {
+               "type":"string",
+               "description":"char"
+               },
+        "smoke_suite":  {
+               "type":"string",
+               "description":"smote suit value"
+               },
+        "available": {
+          "type": "enum",
+          "description": "available status",
+          "choice": "Y,N"
+        },
+        "tags":  {
+               "type":"string",
+               "description":"tag value"
+               },
+        "comment":  {
+               "type":"string",
+               "description":"comments"
+               }
+      },
+      "example": ["tssupdate3 chip testing_prj rev r1_0 block ATPG add_vector test_vector1234 design_engineer c_snoron interface JTAG interface_frequency 24 vector_type PROD platform SLT_GGC","tssupdate3 chip testing_prj rev r1_0 block ATPG add_vector /usr2/c_snoron/vector_list.csv design_engineer c_snoron interface JTAG interface_frequency 24 vector_type PROD "]
+    },
+      "remove_vector": {
+        "mandatory": {
+          "remove_vector": {
+               "type":"string",
+               "description":"vector name",
+               "choice": "vector name/ comma separated vector names/ list file csv"
+               },
+         "chip":{
+               "type":"string",
+               "description":"Project name",
+               "Function": "get_project_name()"
+               },
+        "rev": {
+               "type":"string",
+               "description":"revision name",
+               "Function": "get_revision_name(chip)"
+               },
+        "block": {
+               "type":"string",
+               "description":"block name",
+               "Function": "get_block_name(chip,rev"
+               }
+        },
+        "optional": {
+        },
+        "example":["tssupdate3 remove_vector vector1,vector2 block acc chip torino rev r1_tsmcn20soc","tssupdate3 remove_vector vector_list block acc chip torino rev r1_tsmcn20soc"]
+      },
+     "remove_label": {
+        "mandatory": {
+          "remove_label":{
+               "type":"string",
+               "description":"label name",
+               "choice": "label name/ comma separated label names/ list file csv"
+               },
+         "chip":{
+               "type":"string",
+               "description":"Project name",
+               "Function": "get_project_name()"
+               },
+        "rev": {
+               "type":"string",
+               "description":"revision name",
+               "Function": "get_revision_name(chip)"
+               },
+        "block": {
+               "type":"string",
+               "description":"block name",
+               "Function": "get_block_name(chip,rev)"
+               }
+        },
+        "optional": {
+        },
+       "example": ["tssupdate3 remove_label label1,label2 block acc chip torino rev r1_tsmcn20soc","tssupdate3 remove_label label_list block acc chip torino rev r1_tsmcn20soc"]
+      }
+    }
+}
