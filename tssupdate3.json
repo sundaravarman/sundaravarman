@@ -33,17 +33,17 @@
                "type":"string",
                "description":"vector name/ comma separated vector names/ list file csv"
                },
-        "chip":{
+        "sundar":{
                "type":"string",
                "description":"Project name",
                "Function": "get_project_name()"
                },
-        "rev": {
+        "varman": {
                "type":"string",
                "description":"revision name",
                "Function": "get_revision_name(chip)"
                },
-        "block": {
+        "madurai": {
                "type":"string",
                "description":"block name",
                "Function": "get_block_name(chip,rev)"
@@ -138,7 +138,10 @@
                "description":"comments"
                }
       },
-      "example": ["tssupdate3 update_vector vector1,vector2 block acc chip torino rev r1_tsmcn20soc", "tssupdate3 remove_vector vector_list block acc chip torino rev r1_tsmcn20soc"]
+      "example": ["tssupdate3 update_vector vector1,vector2 block acc chip torino rev r1_tsmcn20soc", "tssupdate3 remove_vector vector_list block acc chip torino rev r1_tsmcn20soc"],
+	  "Template": {
+      	"tssupdate3 -update_vector <update_vector> -chip <chip> -rev <rev> -block <block> -vector_type <vector_type>":""
+      }
     },
     "add_vector": {
       "mandatory": {
@@ -251,7 +254,11 @@
                "description":"comments"
                }
       },
-      "example": ["tssupdate3 chip testing_prj rev r1_0 block ATPG add_vector test_vector1234 design_engineer c_snoron interface JTAG interface_frequency 24 vector_type PROD platform SLT_GGC","tssupdate3 chip testing_prj rev r1_0 block ATPG add_vector /usr2/c_snoron/vector_list.csv design_engineer c_snoron interface JTAG interface_frequency 24 vector_type PROD "]
+      "example": ["tssupdate3 chip testing_prj rev r1_0 block ATPG add_vector test_vector1234 design_engineer c_snoron interface JTAG interface_frequency 24 vector_type PROD platform SLT_GGC","tssupdate3 chip testing_prj rev r1_0 block ATPG add_vector /usr2/c_snoron/vector_list.csv design_engineer c_snoron interface JTAG interface_frequency 24 vector_type PROD "],
+	  "Template": {
+      	"tssupdate3 -add_vector <add_vector> -chip <chip> -rev <rev> -block <block> -interface <interface> -interface_frequency <interface_frequency> -design_engineer <design_engineer> -vector_type <vector_type>":""
+      }
+
     },
       "remove_vector": {
         "mandatory": {
@@ -278,7 +285,10 @@
         },
         "optional": {
         },
-        "example":["tssupdate3 remove_vector vector1,vector2 block acc chip torino rev r1_tsmcn20soc","tssupdate3 remove_vector vector_list block acc chip torino rev r1_tsmcn20soc"]
+        "example":["tssupdate3 remove_vector vector1,vector2 block acc chip torino rev r1_tsmcn20soc","tssupdate3 remove_vector vector_list block acc chip torino rev r1_tsmcn20soc"],
+	  "Template": {
+      	"tssupdate3 -remove_vector <remove_vector> -chip <chip> -rev <rev> -block <block>":""
+      }
       },
      "remove_label": {
         "mandatory": {
