@@ -1,13 +1,54 @@
 {
   "tssupdate3": {
-    "add_milestone": {
-      "mandatory": {
-        "Chip": {
+     "getphasing": {
+        "mandatory": {
+        "chip":{
                "type":"string",
                "description":"Project name",
                "Function": "get_project_name()"
                },
-
+        "rev": {
+               "type":"string",
+               "description":"revision name",
+               "Function": "get_revision_name(chip)"
+               },
+        "block": {
+               "type":"string",
+               "description":"block name",
+               "Function": "get_block_name(chip,rev)"
+               },
+        "platform": {
+               "type":"enum",
+               "description":"platform name",
+               "choice": "ATE,ATE_GGC,SLT_GGC,ATE:ATE_GGC:SLT_GGC,ATE:ATE_GGC,ATE:SLT_GGC,ATE_GGC:SLT_GGC,UFLEX,ATE:UFLEX,ATE:SLT_GGC:ATE_GGC:UFLEX,UFLEX:ATE_GGC,UFLEX:SLT_GGC"
+               }
+        },
+        "optional": {
+        },
+      "example": {
+      	"testing_prj":"",
+		"r1_0":"",
+		"ATPG_POIPU":"",
+		"ATE":""
+      },
+	  "Eg": {
+      	"tssupdate3 -getphasing -chip testing_prj -rev r1_0 -block ATPG_POIPU -platform ATE":""
+      },
+	  "Template": {
+      	"tssupdate3 -getphasing -chip <chip> -rev <rev> -block <block> -platform <platform>":""
+      }
+      },
+    "add_milestone": {
+      "mandatory": {
+        "add_milestone": {
+               "type":"string",
+          "description":"milestone name and date in the format , milestone_name=<MM/DD/YYY>, eg: SC=04/30/2018,SOD=08/24/2018,CS=05/14/2020.\n available choice are : 'BTO','TO','SC','BO','SOD','CSRR','P0','P1','P2','P3','P4A','P4B','SPLITS','CS'"
+        },
+		"Chip": {
+               "type":"string",
+               "description":"Project name",
+               "Function": "get_project_name()"
+               },
         "rev": {
                "type":"string",
                "description":"Revision name",
@@ -17,11 +58,8 @@
                "type":"string",
                "description":"foundry name",
                "Function": "get_foundry_name(chip,rev)"
-               },
-        "add_milestone": {
-               "type":"string",
-          "description":"milestone name and date in the format , milestone_name=<MM/DD/YYY>, eg: SC=04/30/2018,SOD=08/24/2018,CS=05/14/2020.\n available choice are : 'BTO','TO','SC','BO','SOD','CSRR','P0','P1','P2','P3','P4A','P4B','SPLITS','CS'"
-        }
+               }
+        
       },
       "optional": {
       },
@@ -29,24 +67,41 @@
     },
     "update_vector": {
       "mandatory": {
-        "update_vector": {
+		"update_vector": {
                "type":"string",
-               "description":"vector name/ comma separated vector names/ list file csv"
-               },
-        "sundar":{
+               "description":"Filepath to update_vector"
+               },  
+        "chip":{
                "type":"string",
                "description":"Project name",
                "Function": "get_project_name()"
                },
-        "varman": {
+        "rev": {
                "type":"string",
                "description":"revision name",
                "Function": "get_revision_name(chip)"
                },
-        "madurai": {
+        "block": {
                "type":"string",
                "description":"block name",
                "Function": "get_block_name(chip,rev)"
+               },
+       "vector_type":  {
+               "type":"enum",
+               "description":"vector name",
+               "choice": "'PROD','EVAL','RMA','QMFAT','BURN_IN','DEBUG','UNKNOWN','REPAIR','VALIDATION'"
+               },
+        "interface":  {
+               "type":"string",
+               "description":"interface name"
+               },
+        "interface_frequency":  {
+               "type":"varchar",
+               "description":"interface frequency in MHz"
+               },
+        "design_engineer": {
+               "type":"string",
+               "description":"design engineer's name"
                }
       },
       "optional": {
@@ -140,17 +195,54 @@
       },
       "example": ["tssupdate3 update_vector vector1,vector2 block acc chip torino rev r1_tsmcn20soc", "tssupdate3 remove_vector vector_list block acc chip torino rev r1_tsmcn20soc"],
 	  "Template": {
-      	"tssupdate3 -update_vector <update_vector> -chip <chip> -rev <rev> -block <block> -vector_type <vector_type>":""
+      	"tssupdate3 -update_vector <update_vector> -chip <chip> -rev <rev> -block <block> -interface <interface> -interface_frequency <interface_frequency> -design_engineer <design_engineer> -vector_type <vector_type>":""
+      }
+    },
+    "update_phasing": {
+      "mandatory": {
+        "chip":{
+               "type":"string",
+               "description":"Project name",
+               "Function": "get_project_name()"
+               },
+        "rev": {
+               "type":"string",
+               "description":"revision name",
+               "Function": "get_revision_name(chip)"
+               },
+        "block": {
+               "type":"string",
+               "description":"block name",
+               "Function": "get_block_name(chip,rev)"
+               },
+        "platform": {
+               "type":"enum",
+               "description":"platform name",
+               "choice": "ATE,ATE_GGC,SLT_GGC,ATE:ATE_GGC:SLT_GGC,ATE:ATE_GGC,ATE:SLT_GGC,ATE_GGC:SLT_GGC,UFLEX,ATE:UFLEX,ATE:SLT_GGC:ATE_GGC:UFLEX,UFLEX:ATE_GGC,UFLEX:SLT_GGC"
+               }      },
+      "optional": {
+        "type":  {
+               "type":"enum",
+               "description":"vector name",
+               "choice": "'PROD','EVAL','RMA','QMFAT','BURN_IN','DEBUG','UNKNOWN','REPAIR','VALIDATION'"
+               },
+        "comment":  {
+               "type":"string",
+               "description":"comments"
+               }
+      },
+      "example": ["tssupdate3 -update_phasing input_file -chip napali -rev r1_secn10lpe -block TEST_BLK8 -type pattern -platform SLT_GGC", ""],
+	  "Template": {
+      	"tssupdate3 -update_phasing <file_path> -chip <chip> -rev <rev> -platform <platform>":""
       }
     },
     "add_vector": {
       "mandatory": {
         "add_vector": {
                "type":"string",
-               "description":"vector name",
-               "choice": "vector name/ comma separated vector names/ list file csv"
+               "description":"enter the name of vector,follow the convention from go/tsshelp"
                },
-         "chip":{
+        "chip":{
                "type":"string",
                "description":"Project name",
                "Function": "get_project_name()"
@@ -182,6 +274,7 @@
                "type":"string",
                "description":"design engineer's name"
                }
+   
       },
       "optional": {
          "microcode": {
@@ -262,12 +355,11 @@
     },
       "remove_vector": {
         "mandatory": {
-          "remove_vector": {
+			"remove_vector": {
                "type":"string",
-               "description":"vector name",
-               "choice": "vector name/ comma separated vector names/ list file csv"
+               "description":"Project name"
                },
-         "chip":{
+        "chip":{
                "type":"string",
                "description":"Project name",
                "Function": "get_project_name()"
@@ -292,12 +384,11 @@
       },
      "remove_label": {
         "mandatory": {
-          "remove_label":{
+		"remove_label": {
                "type":"string",
-               "description":"label name",
-               "choice": "label name/ comma separated label names/ list file csv"
-               },
-         "chip":{
+               "description":"Project name"
+               },	
+        "chip":{
                "type":"string",
                "description":"Project name",
                "Function": "get_project_name()"
