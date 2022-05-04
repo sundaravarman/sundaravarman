@@ -25,13 +25,13 @@
         },
         "optional": {
         },
-      "example": {
+      "EG": {
       	"testing_prj":"",
 		"r1_0":"",
 		"ATPG_POIPU":"",
 		"ATE":""
       },
-	  "Eg": {
+	  "example": {
       	"tssupdate3 -getphasing -chip testing_prj -rev r1_0 -block ATPG_POIPU -platform ATE":""
       },
 	  "Template": {
@@ -193,9 +193,11 @@
                "description":"comments"
                }
       },
-      "example": ["tssupdate3 update_vector vector1,vector2 block acc chip torino rev r1_tsmcn20soc", "tssupdate3 remove_vector vector_list block acc chip torino rev r1_tsmcn20soc"],
+      "example": {
+		  "tssupdate3 -update_vector sundar123 -chip testing_prj -rev r1_0 -block ATPG_POIPU -vector_type PROD -interface tic -interface_frequency 12 -design_engineer sundara":""
+	  }
 	  "Template": {
-      	"tssupdate3 -update_vector <update_vector> -chip <chip> -rev <rev> -block <block> -interface <interface> -interface_frequency <interface_frequency> -design_engineer <design_engineer> -vector_type <vector_type>":""
+      	"tssupdate3 -update_vector <update_vector> -chip <chip> -rev <rev> -block <block> -vector_type <vector_type> -interface <interface> -interface_frequency <interface_frequency> -design_engineer <design_engineer>":""
       }
     },
     "update_phasing": {
@@ -231,9 +233,11 @@
                "description":"comments"
                }
       },
-      "example": ["tssupdate3 -update_phasing input_file -chip napali -rev r1_secn10lpe -block TEST_BLK8 -type pattern -platform SLT_GGC", ""],
+      "example":{
+		  "tssupdate3 -update_phasing -chip testing_prj -rev r1_0 -block ATPG_POIPU -platform ATE":""
+	  }
 	  "Template": {
-      	"tssupdate3 -update_phasing <file_path> -chip <chip> -rev <rev> -platform <platform>":""
+      	"tssupdate3 -update_phasing -chip <chip> -rev <rev> -block <block> -platform <platform>":""
       }
     },
     "add_vector": {
@@ -347,9 +351,11 @@
                "description":"comments"
                }
       },
-      "example": ["tssupdate3 chip testing_prj rev r1_0 block ATPG add_vector test_vector1234 design_engineer c_snoron interface JTAG interface_frequency 24 vector_type PROD platform SLT_GGC","tssupdate3 chip testing_prj rev r1_0 block ATPG add_vector /usr2/c_snoron/vector_list.csv design_engineer c_snoron interface JTAG interface_frequency 24 vector_type PROD "],
+      "example":  {
+      	"tssupdate3 -add_vector <add_vector> -chip <chip> -rev <rev> -block <block> -vector_type <vector_type> -interface <interface> -interface_frequency <interface_frequency> -design_engineer <design_engineer>":""
+      }
 	  "Template": {
-      	"tssupdate3 -add_vector <add_vector> -chip <chip> -rev <rev> -block <block> -interface <interface> -interface_frequency <interface_frequency> -design_engineer <design_engineer> -vector_type <vector_type>":""
+      	"tssupdate3 -add_vector <add_vector> -chip <chip> -rev <rev> -block <block> -vector_type <vector_type> -interface <interface> -interface_frequency <interface_frequency> -design_engineer <design_engineer>":""
       }
 
     },
@@ -377,7 +383,9 @@
         },
         "optional": {
         },
-        "example":["tssupdate3 remove_vector vector1,vector2 block acc chip torino rev r1_tsmcn20soc","tssupdate3 remove_vector vector_list block acc chip torino rev r1_tsmcn20soc"],
+        "example": {
+      	"tssupdate3 -remove_vector sundar123 -chip testing_prj -rev r1_0 -block ATPG_POIPU":""
+      }
 	  "Template": {
       	"tssupdate3 -remove_vector <remove_vector> -chip <chip> -rev <rev> -block <block>":""
       }
